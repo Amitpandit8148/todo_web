@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Todo App</title>
+</head>
+<body>
+    <h1>Todo App</h1>
+    <input placeholder="enter your task">
+    <button>Add task</button>
+
+   <ul>
+    <li>eat <button class="delete">delete</button></li>
+    <li>sleep <button class="delete">delete</button></li>
+   </ul>
+   <script>
+        let btn = document.querySelector("button");
+        let ul = document.querySelector("ul");
+        let inp = document.querySelector("input");
+
+        btn.addEventListener("click", function (event) {
+            let item = document.createElement("li")
+            item.innerText = inp.value;
+        
+            let delBtn = document.createElement("button");
+            delBtn.innerText = "delete";
+            delBtn.classList.add("delete");
+
+            item.appendChild(delBtn);
+            ul.appendChild(item);
+            inp.value = "";
+        });
+
+        inp.addEventListener("keydown", function (event) { 
+            if (event.key === 'Enter') {
+            event.preventDefault();  // Prevent the default action (submitting the form)
+
+            // Trigger the submit button click event
+            btn.click();
+            }
+
+        });
+
+        ul.addEventListener("click", function (event) {
+            if (event.target.nodeName == "BUTTON") {
+                let listItem = event.target.parentElement;
+                listItem.remove();
+                console.log("Deleted");
+            } 
+        });
+
+        // let delBtns = document.querySelectorAll(".delete");
+        // for (delBtn of delBtns) {
+        //     delBtn.addEventListener("click", function () {
+        //         let par = this.parentElement;
+        //         console.log(par);
+        //         par.remove();
+        //     });
+        // }
+   </script>
+</body>
+</html>
